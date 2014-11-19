@@ -51,7 +51,7 @@ var User = {
     },
     
     find : function(query,cb){
-        userCollection.findAll(query).toArray(function(error,userList){  // this was find one, has been changed to find.... If any other areas are affected, update this appropriately
+        userCollection.find(query).toArray(function(error,userList){  // this was find one, has been changed to find.... If any other areas are affected, update this appropriately
             cb(error,userList);
         });
     },

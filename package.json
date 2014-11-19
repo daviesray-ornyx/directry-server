@@ -12,6 +12,10 @@
       "email": "davies@apptuned-consult.com"
     }
   ],
+  "repository": {
+        "type": "git",
+        "url": "https://github.com/jane-doe/node-example.git"
+  },
   "scripts": {
     "start": "node server.js"
   },

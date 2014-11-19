@@ -1,0 +1,6 @@
+/api/auth/register
+    authRoutes.register
+    Request Type post
+    Parameters (userType,username,password)
+    Response Status Codes 200 -- Successfull
+                          400 -- Error

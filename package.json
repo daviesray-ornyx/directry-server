@@ -1,0 +1,40 @@
+{
+  "name": "directry",
+  "version": "0.2.0",
+  "author": {
+    "name": "Davies Ray",
+    "email": "davies@apptuned-consult.com"
+  },
+  "description": "This is an all round directory",
+  "contributors": [
+    {
+      "name": "Davies Ray",
+      "email": "davies@apptuned-consult.com"
+    }
+  ],
+  "main": "./server.js",
+  "keywords": [
+    "azure",
+    "boilerplate",
+    "express"
+  ],
+  "dependencies": {
+    "jade": "*",
+    "express": "3.4.4",
+	"bcrypt-nodejs": "*",
+	"multer" : "*",
+    "jade": "*",
+    "stylus": "*",
+    "body-parser" : "*",
+    "express-session" : "*",
+    "mongodb" : "*",
+    "passport" : "*",
+    "passport-http" : "*"
+
+  },
+  "noAnalyze": true,
+  "license": "Apache",
+  "engines": {
+    "node": ">=0.6.14"
+  }
+}

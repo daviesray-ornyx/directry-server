@@ -12,6 +12,9 @@
       "email": "davies@apptuned-consult.com"
     }
   ],
+  "scripts": {
+    "start": "node server.js"
+  },
   "main": "./server.js",
   "keywords": [
     "azure",

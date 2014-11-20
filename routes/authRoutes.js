@@ -76,8 +76,25 @@ var userRoutes = {
                                     res.send('Error registering user. Adding user to db');
                                 }
                                 else {
-                                    res.statusCode = 200;
-                                    res.send('User successfully inserted to db');
+                                    
+                                    // we need to return user details... this is because the next step is to take user to the profile page
+                                    if (userType == 'institution') {
+                                        // retrieve institution profile
+                                    }
+                                    else if (userType == 'person') {
+                                        // retrieve person profile
+                                        var person = require('../models/Person');
+                                        person.getProfile(username, function (error, profile) {
+                                            if(error){
+                                                res.statusCode = 400;
+                                                res.send('Error retrieving person profile');
+                                            }
+                                            else{
+                                                res.statusCode = 200;
+                                                 res.send(profile);
+                                            }
+                                        });
+                                    }                                   
                                 }
                             });
                         }

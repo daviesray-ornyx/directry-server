@@ -80,6 +80,18 @@ var userRoutes = {
                                     // we need to return user details... this is because the next step is to take user to the profile page
                                     if (userType == 'institution') {
                                         // retrieve institution profile
+                                        // retrieve person profile
+                                        var institution = require('../models/Institution');
+                                        institution.getProfile(username, function (error, profile) {
+                                            if(error){
+                                                res.statusCode = 400;
+                                                res.send('Error retrieving profile');
+                                            }
+                                            else{
+                                                res.statusCode = 200;
+                                                 res.send(profile);
+                                            }
+                                        });
                                     }
                                     else if (userType == 'person') {
                                         // retrieve person profile
@@ -87,7 +99,7 @@ var userRoutes = {
                                         person.getProfile(username, function (error, profile) {
                                             if(error){
                                                 res.statusCode = 400;
-                                                res.send('Error retrieving person profile');
+                                                res.send('Error retrieving profile');
                                             }
                                             else{
                                                 res.statusCode = 200;

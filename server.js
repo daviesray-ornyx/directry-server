@@ -127,6 +127,7 @@ if ('development' == app.get('env')) {
 //BEGIN Authentication Routes, these are for general users.... we however need to know the user type
 app.get('/', authRoutes.index);
 app.post('/api/auth/register', authRoutes.register); 
+app.post('/api/auth/login', authRoutes.login); 
 app.get('/api/auth/request_password_reset_code', authRoutes.requestPasswordResetCode);  
 app.post('/api/auth/reset_password', authRoutes.resetPassword);                        
 app.get('/api/auth/user/:username?',passport.authenticate('basic'), authRoutes.findUser); 

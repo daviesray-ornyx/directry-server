@@ -132,15 +132,46 @@ var userRoutes = {
         var userCollection = db.collection('users');
         User.authenticate({ username: username, password: password }, function (error, user) {
             if (error) {
+                res.statusCode = 400;
                 res.send('Login error');
             }
             else if (!user) {
                 // User already exists in the db
-                res.send('Error No such user in system');
+                res.statusCode = 400;
+                res.send('Invalid username and or password');
             }
             else {
                 //Success
-
+                // we need to return user details... this is because the next step is to take user to the profile page
+                                    if (user.userType == 'institution') {
+                                        // retrieve institution profile
+                                        // retrieve person profile
+                                        var institution = require('../models/Institution');
+                                        institution.getProfile(username, function (error, profile) {
+                                            if(error){
+                                                res.statusCode = 400;
+                                                res.send('Error retrieving profile');
+                                            }
+                                            else{
+                                                res.statusCode = 200;
+                                                 res.send(profile);
+                                            }
+                                        });
+                                    }
+                                    else if (user.userType == 'person') {
+                                        // retrieve person profile
+                                        var person = require('../models/Person');
+                                        person.getProfile(username, function (error, profile) {
+                                            if(error){
+                                                res.statusCode = 400;
+                                                res.send('Error retrieving profile');
+                                            }
+                                            else{
+                                                res.statusCode = 200;
+                                                 res.send(profile);
+                                            }
+                                        });
+                                    }           
             }
 
         });

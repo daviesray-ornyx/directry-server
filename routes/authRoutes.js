@@ -5,7 +5,7 @@
 var bcrypt = require('bcrypt-nodejs');
 var crypto = require('crypto');
 var User = require('../models/User');
-
+var nodemailer = require('nodemailer');
  
 
 function randomValueHex (len) {
@@ -193,8 +193,31 @@ var userRoutes = {
                 }
                 else {
                     // send Email
+                    var transporter = nodemailer.createTransport({
+                        service: 'Gmail',
+                        auth: {
+                            user: 'dawoodyray@gmail.com',
+                            pass: 'dawoodyray1990amayos'
+                        }
+                    });
 
-                    res.send("Reset Password Code sent to " + username);   // this should be sent to user email with the message showing this
+                    var mailOptions = {
+                        from: 'directry inc <support@directry.com>', // sender address
+                        to: 'daviesray.ornyx@gmail.com', // list of receivers : comma separated values
+                        subject: 'Password reset Code ✔', // Subject line
+                        text: "Password Reset Code is " . result.Code, // plaintext body
+                        html: '<b>We value you!</b>' // html body
+                    };
+
+                    transporter.sendMail(mailOptions, function(error, info){
+                        if(error){
+                            res.statusCode = 400;
+                            res.send('Could not generate reset passord code. Please try again');
+                        }else{
+                            res.send("Reset Password Code sent to " + username);   // this should be sent to user email with the message showing this
+                        }
+                    });
+                    
                 }
             });
         }

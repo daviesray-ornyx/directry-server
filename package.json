@@ -36,7 +36,8 @@
     "express-session" : "*",
     "mongodb" : "*",
     "passport" : "*",
-    "passport-http" : "*"
+    "passport-http" : "*",
+    "nodemailer": "*"
 
   },
   "noAnalyze": true,

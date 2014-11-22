@@ -193,7 +193,7 @@ var userRoutes = {
                 }
                 else {
                     // send Email
-                    var transporter = nodemailer.createTransport({
+                    /*var transporter = nodemailer.createTransport({
                         service: 'Gmail',
                         auth: {
                             user: 'dawoodyray@gmail.com',
@@ -217,7 +217,8 @@ var userRoutes = {
                             res.send("Reset Password Code sent to " + username);   // this should be sent to user email with the message showing this
                         }
                     });
-                    
+                    */
+                     res.send(result);
                 }
             });
         }

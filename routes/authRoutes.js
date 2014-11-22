@@ -192,7 +192,9 @@ var userRoutes = {
                     res.send('Error generating Password Reset Code');
                 }
                 else {
-                    res.send(result);
+                    // send Email
+
+                    res.send("Reset Password Code sent to " + username);   // this should be sent to user email with the message showing this
                 }
             });
         }

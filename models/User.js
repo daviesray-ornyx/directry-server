@@ -57,7 +57,7 @@ var User = {
     },
 
     authenticate: function (authObject, cb) {        
-        userCollection.findOne({username : authObject.username},function(error,user){
+        userCollection.findOne({username : authObject.username, userType : authObject.userType},function(error,user){
             //cb(error,user);
             if(error){ 
                 console.log('Error retrieving user');

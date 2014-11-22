@@ -129,9 +129,8 @@ var userRoutes = {
     login: function (req, res) {
         var username = req.body.username;
         var password = req.body.password;
-        var userType = req.body.userType;
         var userCollection = db.collection('users');
-        User.authenticate({ userType: userType, username: username, password: password }, function (error, user) {
+        User.authenticate({username: username, password: password }, function (error, user) {
             if (error) {
                 res.statusCode = 400;
                 res.send('Login error');

@@ -72,7 +72,7 @@ var userRoutes = {
                             }
                             User.insert(user, function (err, users) {
                                 if (err) {
-                                    res.statusCode = 500;
+                                    res.statusCode = 400;
                                     res.send('Error registering user. Adding user to db');
                                 }
                                 else {
@@ -84,7 +84,7 @@ var userRoutes = {
                                         var institution = require('../models/Institution');
                                         institution.getProfile(username, function (error, profile) {
                                             if(error){
-                                                res.statusCode = 500;
+                                                res.statusCode = 400;
                                                 res.send('Error retrieving profile');
                                             }
                                             else{
@@ -98,7 +98,7 @@ var userRoutes = {
                                         var person = require('../models/Person');
                                         person.getProfile(username, function (error, profile) {
                                             if(error){
-                                                res.statusCode = 500;
+                                                res.statusCode = 400;
                                                 res.send('Error retrieving profile');
                                             }
                                             else{
@@ -132,12 +132,12 @@ var userRoutes = {
         var userCollection = db.collection('users');
         User.authenticate({username: username, password: password }, function (error, user) {
             if (error) {
-                res.statusCode = 500;
+                res.statusCode = 400;
                 res.send('Login error');
             }
             else if (!user) {
                 // User already exists in the db
-                res.statusCode = 500;
+                res.statusCode = 400;
                 res.send('Invalid username and or password');
             }
             else {
@@ -149,7 +149,7 @@ var userRoutes = {
                                         var institution = require('../models/Institution');
                                         institution.getProfile(username, function (error, profile) {
                                             if(error){
-                                                res.statusCode = 500;
+                                                res.statusCode = 400;
                                                 res.send('Error retrieving profile');
                                             }
                                             else{
@@ -163,7 +163,7 @@ var userRoutes = {
                                         var person = require('../models/Person');
                                         person.getProfile(username, function (error, profile) {
                                             if(error){
-                                                res.statusCode = 500;
+                                                res.statusCode = 400;
                                                 res.send('Error retrieving profile');
                                             }
                                             else{
@@ -189,7 +189,7 @@ var userRoutes = {
         if (username && username != '') {
             updatePasswordResetCode(username, function (error, result) {
                 if (error) {
-                    res.statusCode = 500;
+                    res.statusCode = 400;
                     res.send('Error generating Password Reset Code');
                 }
                 else {
@@ -212,7 +212,7 @@ var userRoutes = {
 
                     transporter.sendMail(mailOptions, function(error, info){
                         if(error){
-                            res.statusCode = 500;
+                            res.statusCode = 400;
                             res.send('Could not generate reset passord code. Please try again');
                         }else{
                             res.send("Reset Password Code sent to " + username);   // this should be sent to user email with the message showing this
@@ -225,7 +225,7 @@ var userRoutes = {
             });
         }
         else {
-            res.statusCode = 500;
+            res.statusCode = 400;
             res.send('No username entered');
         }
     },
@@ -241,12 +241,12 @@ var userRoutes = {
                 // check is username is in db
                 User.findByUsername(username, function (error, user) {
                     if (error) {
-                        res.statusCode = 500;
+                        res.statusCode = 400;
                         res.send('Error Retrieving user');
                     }
                     else if (!user) {
                         // User already exists in the db
-                        res.statusCode = 500;
+                        res.statusCode = 400;
                         res.send('Error : No user with given username');
                     }
                     else {
@@ -256,11 +256,11 @@ var userRoutes = {
                             // reset code has expired. Tell user and give new code
                             updatePasswordResetCode(req.body.username, function (error, result) {
                                 if (error) {
-                                    res.statusCode = 500;
+                                    res.statusCode = 400;
                                     res.send('Error generating Password Reset Code');
                                 }
                                 else {
-                                    res.statusCode = 500;
+                                    res.statusCode = 400;
                                     res.send({ 'Message': 'Your Password reset code has expired.', 'The new details: ': result });
                                 }
                             });
@@ -275,14 +275,14 @@ var userRoutes = {
                                     bcrypt.hash(password, null, null, function (error, hash) {
                                         if (error) {
                                             // error hashing password
-                                            res.statusCode = 500;
+                                            res.statusCode = 400;
                                             res.send('Error hashing the new password');
                                         }
                                         else {
                                             // update details
                                             User.update({ username: username }, { $set: { passwordResetCode: '', resetPasswordExpiryDate: '', password: hash} }, function (error) {
                                                 if (error) {
-                                                    res.statusCode = 500;
+                                                    res.statusCode = 400;
                                                     res.send('Password Reset Failed!!');
                                                 }
                                                 else {
@@ -296,7 +296,7 @@ var userRoutes = {
                                 else {
                                     // authentication failed
                                     console.log('Provided code does not match, return message');
-                                    res.statusCode = 500;
+                                    res.statusCode = 400;
                                     res.send('Provided code does not match x more attempts before password is reset');
                                 }
 

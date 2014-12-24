@@ -38,7 +38,7 @@ var Person = {
            else{
                // General profile retrieved successfully
                     // retrieve person profile info
-                findById(profile.profileInfo,function(error,personalInfo){
+                personCollection.findOne({_id : profile.profileInfo},function(error,personalInfo){
                     if(error){
                         // error finding personal info
                         console.log('error finding personal info');
@@ -60,7 +60,7 @@ var Person = {
         personCollection.update(option,query,function(error){
            cb(error); 
         });
-    }, 
+    } 
 }
 
 module.exports = Person;
